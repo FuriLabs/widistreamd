@@ -202,12 +202,11 @@ on_pa_nd_sink_got_info (pa_context         *c,
   g_debug ("NdPulseaudio: Creating sink for: %s", self->name);
   /* We have reached the list end without being cancelled first.
    * This means no screencast sink exist, and we need to create it. */
-  g_autofree gchar *module_args = g_strdup_printf ("sink_name=" ND_PA_SINK "_%.8s"
-                                                   " "
+  g_autofree gchar *module_args = g_strdup_printf ("sink_name=" ND_PA_SINK "_%.8s "
                                                    "rate=48000 "
-                                                   "sink_properties=device.class=\"sound\" "
-                                                   "device.icon_name=\"network-wireless\" "
-                                                   "device.description=\"%s\"",
+                                                   "sink_properties=device.description=\"%s\""
+                                                   "device.class=\"sound\""
+                                                   "device.icon_name=\"network-wireless\"",
                                                    self->uuid,
                                                    self->name);
   self->operation = pa_context_load_module (self->context,
